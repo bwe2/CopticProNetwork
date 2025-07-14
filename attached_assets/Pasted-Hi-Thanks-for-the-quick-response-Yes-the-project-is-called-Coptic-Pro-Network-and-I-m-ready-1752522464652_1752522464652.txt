@@ -1,0 +1,50 @@
+Hi! Thanks for the quick response.
+
+Yes, the project is called **Coptic Pro Network**, and I’m ready to begin building the MVP now.
+
+🧠 Project Type:
+A **professional networking and referral platform** for Coptic Orthodox Christians — like a mix of LinkedIn, GroupMe, and a private job-matching tool grounded in church trust and AI.
+
+🎯 Main Goals:
+- Help users find jobs through private referrals
+- Let users share job opportunities within trusted Coptic church groups
+- Enable users to become known professionally by participating in mentorship pods, chats, and community threads
+
+👤 Target Audience:
+- Coptic Christians looking for jobs, mentors, or collaborators
+- Coptic business owners wanting to hire within the community
+- Church leaders and professionals who want to give back
+
+🧩 Core Features:
+- Resume upload + GPT resume parsing and rewriting (Pro+)
+- Group chats: 1 church + 1 topic group for Free users; full access for Pro/Business
+- Private referral system with messaging
+- Tiered access model (Stripe-based):
+  • Free – limited access
+  • Pro – $5/month or $50/year
+  • Business – $15/month or $150/year
+- Invite-based join flow: user selects purpose ("Find a job", "Hire", "Collaborate")
+- Admin panel with full control over users, flags, groups, upgrades
+- Feedback system + AI-powered moderation
+- Google Login for real users
+- Username/password login for admin + test users
+- GPT access controlled by tier
+- Stripe webhooks trigger tier changes (monthly/yearly discount included)
+- Hidden donation page with 2-week popup for Free users
+- Integration-ready for Google Calendar and Drive (for resume import + pod scheduling)
+
+🔐 Test User Setup:
+- `admin` / `admin` — full system control
+- `free_test`, `pro_test`, `biz_test`, `mentor_test` — all with password `CopticTest#2025`
+- These accounts bypass Stripe and email requirements
+
+💻 Tech Stack:
+- **Frontend**: React + TailwindCSS (MarceloDesignX style: floating UI, hover effects, microinteractions)
+- **Backend**: Supabase (Postgres + Auth + Storage + RLS)
+- **GPT**: OpenAI GPT-4o via direct API
+- **Billing**: Stripe subscription with yearly discount
+- **No n8n dependency** at launch
+
+Let me know if you’d like me to re-upload the `CopticProNetwork_FullSystemDocs.zip` which contains all Markdown system specs.
+
+I’m ready to build now — please begin the Replit Agent prompt setup based on the details above.

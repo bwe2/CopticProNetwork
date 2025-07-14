@@ -1,0 +1,87 @@
+---
+
+## ⚖️ Legal Disclaimers & Ownership Notice
+
+### 📛 Ownership
+
+> **Coptic Pro Network** is a professional networking platform developed, owned, and operated by **Organized Greatness LLC**, a registered limited liability company. All rights reserved.
+
+---
+
+### 🛡️ Terms of Use
+
+By accessing or using this platform, you agree to comply with our:
+- **Terms of Service**
+- **Privacy Policy**
+- **Community Code of Conduct**
+
+These documents govern your rights, responsibilities, and the appropriate use of the platform.
+
+---
+
+### 🧑‍⚖️ Liability Disclaimer
+
+The content and connections made through this platform are for **informational and networking purposes only**. **Organized Greatness LLC** is not responsible for:
+- The accuracy of job listings, referrals, or user-submitted content
+- Employment outcomes or offers
+- Disputes between users or businesses
+
+We reserve the right to moderate or remove content that violates our policies.
+
+---
+
+### 🔒 Privacy & Data Protection
+
+We respect your privacy and are committed to safeguarding your data. All personal information is:
+- Encrypted at rest and in transit
+- Never sold to third parties
+- Only used to improve your experience
+
+Please review the **Privacy Policy** for details on how we collect, store, and use your data.
+
+---
+
+### 🏢 Business Identity
+
+**Business Name**: Organized Greatness LLC  
+**Application**: Coptic Pro Network  
+**Jurisdiction**: United States (NJ-based LLC)  
+**Trademark Status**: “Coptic Pro Network” is used as a service name under Organized Greatness LLC.  
+**Contact Email**: support@organizedgreatness.com *(or placeholder until domain email is live)*
+
+---
+
+### 💳 Stripe, Google, and AI Disclosures
+
+- **Stripe**: All payments are securely processed through Stripe. We never store your credit card details.
+- **Google OAuth**: Authentication uses Google’s secure OAuth login. We only access your name, email, and profile photo with your permission.
+- **OpenAI/GPT**: Resume optimization and AI suggestions are powered by OpenAI. No resume content is shared or stored outside our secured database.
+
+---
+
+### 🙏 Donation Disclosure
+
+Donations are optional and go toward:
+- Hosting and server infrastructure
+- Moderation and AI processing costs
+- Keeping the platform free for new users
+
+**Organized Greatness LLC** is not a registered non-profit. Donations are **not tax-deductible**. Please consult a tax advisor.
+
+---
+
+### 🧾 Footer Link Placement (UI Guidance)
+
+Place the following links in the **footer of every page**:
+
+- [Terms of Service](#)
+- [Privacy Policy](#)
+- [Code of Conduct](#)
+- [Contact](mailto:support@organizedgreatness.com)
+- [Donate](#)
+
+Use subtle hover effects and maintain MarceloDesignX styling — soft underline or fade-in link glow.
+
+---
+
+© 2025 Coptic Pro Network. A project of **Organized Greatness LLC**. All rights reserved.
