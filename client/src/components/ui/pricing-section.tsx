@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
 
@@ -68,14 +68,14 @@ export function PricingSection() {
         
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
-            <Card key={index} className={`glass-card bg-[#1a1a1a] relative ${
+            <div key={index} className={`industry-card relative ${
               plan.popular ? 'ring-2 ring-[#F28C13]' : ''
             }`}>
               {plan.popular && (
                 <div className="popular-badge">Most Popular</div>
               )}
               
-              <CardContent className="p-8 text-center">
+              <div className="text-center">
                 <div className="mb-6">
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   <p className="text-gray-400">{plan.description}</p>
@@ -113,8 +113,8 @@ export function PricingSection() {
                 >
                   {plan.buttonText}
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>

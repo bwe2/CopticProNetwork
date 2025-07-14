@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+
 import { 
   Briefcase, 
   Users, 
@@ -60,19 +60,17 @@ export function ProblemsSection() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {problems.map((problem, index) => (
-            <Card key={index} className="rounded-lg border text-card-foreground shadow-sm glass-card fade-in bg-[#1a1a1a]">
-              <CardContent className="p-6 text-center">
-                <div className={`w-16 h-16 ${
-                  problem.color === 'orange' ? 'bg-[#F28C13]/20' : 'bg-[#0B67AE]/20'
-                } rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce`}>
-                  <problem.icon className={`${
-                    problem.color === 'orange' ? 'text-[#F28C13]' : 'text-[#0B67AE]'
-                  } text-2xl w-8 h-8`} />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{problem.title}</h3>
-                <p className="text-gray-300">{problem.description}</p>
-              </CardContent>
-            </Card>
+            <div key={index} className="industry-card fade-in">
+              <div className={`w-16 h-16 ${
+                problem.color === 'orange' ? 'bg-[#F28C13]/20' : 'bg-[#0B67AE]/20'
+              } rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce`}>
+                <problem.icon className={`${
+                  problem.color === 'orange' ? 'text-[#F28C13]' : 'text-[#0B67AE]'
+                } text-2xl w-8 h-8`} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">{problem.title}</h3>
+              <p className="text-gray-300">{problem.description}</p>
+            </div>
           ))}
         </div>
       </div>

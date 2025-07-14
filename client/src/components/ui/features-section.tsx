@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+
 import { 
   Brain, 
   Users, 
@@ -66,18 +66,16 @@ export function FeaturesSection() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className="glass-card bg-[#1a1a1a]">
-              <CardContent className="p-6 text-center">
-                <div className={`w-12 h-12 ${
-                  feature.color === 'orange' ? 'bg-[#F28C13]/20' : 'bg-[#0B67AE]/20'
-                } rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce`}>
-                  <feature.icon className={`${
-                    feature.color === 'orange' ? 'text-[#F28C13]' : 'text-[#0B67AE]'
-                  } w-6 h-6`} />
-                </div>
-                <h3 className="font-semibold text-sm">{feature.title}</h3>
-              </CardContent>
-            </Card>
+            <div key={index} className="industry-card">
+              <div className={`w-12 h-12 ${
+                feature.color === 'orange' ? 'bg-[#F28C13]/20' : 'bg-[#0B67AE]/20'
+              } rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce`}>
+                <feature.icon className={`${
+                  feature.color === 'orange' ? 'text-[#F28C13]' : 'text-[#0B67AE]'
+                } w-6 h-6`} />
+              </div>
+              <h3 className="font-semibold text-sm">{feature.title}</h3>
+            </div>
           ))}
         </div>
       </div>
