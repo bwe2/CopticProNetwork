@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logoImage from "@assets/Neumorphism style (1)_1752531396906.png";
+import logoImage from "@assets/Neumorphism style (2)_1752532052750.png";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

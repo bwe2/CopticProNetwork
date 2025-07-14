@@ -1,5 +1,5 @@
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
-import logoImage from "@assets/Neumorphism style (1)_1752531396906.png";
+import logoImage from "@assets/Neumorphism style (2)_1752532052750.png";
 
 export function Footer() {
   return (
