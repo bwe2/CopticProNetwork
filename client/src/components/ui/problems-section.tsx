@@ -60,7 +60,7 @@ export function ProblemsSection() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {problems.map((problem, index) => (
-            <Card key={index} className="glass-card fade-in">
+            <Card key={index} className="rounded-lg border text-card-foreground shadow-sm glass-card fade-in bg-[Grey]">
               <CardContent className="p-6 text-center">
                 <div className={`w-16 h-16 ${
                   problem.color === 'orange' ? 'bg-[#F28C13]/20' : 'bg-[#0B67AE]/20'
