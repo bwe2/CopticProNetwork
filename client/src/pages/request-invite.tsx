@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Cross, Check } from "lucide-react";
-import logoImage from "@assets/Neumorphism style (2)_1752532052750.png";
+import logoImage from "@assets/Neumorphism style (4)_1752532238190.png";
 import { insertPendingInviteSchema } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useMutation } from "@tanstack/react-query";
