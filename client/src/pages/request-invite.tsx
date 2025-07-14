@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Cross, Check } from "lucide-react";
+import logoImage from "@assets/Neumorphism style (1)_1752531396906.png";
 import { insertPendingInviteSchema } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useMutation } from "@tanstack/react-query";
@@ -109,9 +110,11 @@ export default function RequestInvite() {
       <Card className="w-full max-w-2xl glass-card">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 bg-[#F28C13] rounded-full flex items-center justify-center">
-              <Cross className="w-6 h-6 text-white" />
-            </div>
+            <img 
+              src={logoImage} 
+              alt="Coptic Pro Network Logo" 
+              className="w-16 h-16 object-contain"
+            />
           </div>
           <CardTitle className="text-3xl font-bold">Request Invitation</CardTitle>
           <p className="text-gray-300">

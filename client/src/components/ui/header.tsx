@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Cross } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logoImage from "@assets/Neumorphism style (1)_1752531396906.png";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,9 +20,11 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-[#F28C13] rounded-full flex items-center justify-center">
-              <Cross className="w-5 h-5 text-white" />
-            </div>
+            <img 
+              src={logoImage} 
+              alt="Coptic Pro Network Logo" 
+              className="w-20 h-20 object-contain"
+            />
             <div>
               <h1 className="text-xl font-bold text-white">Coptic Pro Network</h1>
               <p className="text-xs text-gray-400">Professional Networking</p>

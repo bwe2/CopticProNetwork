@@ -1,4 +1,5 @@
-import { Cross, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import logoImage from "@assets/Neumorphism style (1)_1752531396906.png";
 
 export function Footer() {
   return (
@@ -8,9 +9,11 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-[#F28C13] rounded-full flex items-center justify-center">
-                <Cross className="w-5 h-5 text-white" />
-              </div>
+              <img 
+                src={logoImage} 
+                alt="Coptic Pro Network Logo" 
+                className="w-16 h-16 object-contain"
+              />
               <div>
                 <h3 className="text-xl font-bold text-white">Coptic Pro Network</h3>
               </div>
