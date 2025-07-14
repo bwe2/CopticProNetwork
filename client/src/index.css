@@ -29,7 +29,7 @@
   --secondary-blue: hsl(214, 100%, 59%);
   --dark-base: hsl(0, 0%, 7%);
   --dark-lighter: hsl(0, 0%, 10%);
-  --card-dark: hsla(0, 0%, 10%, 0.45);
+  --card-dark: #1a1a1a;
   --off-white: hsl(0, 0%, 96%);
 }
 
@@ -73,7 +73,7 @@
 
 @layer components {
   .glass-card {
-    background: var(--card-dark);
+    background: #1a1a1a;
     border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
@@ -184,7 +184,7 @@
   }
 
   .industry-card {
-    background: rgba(25, 25, 25, 0.6);
+    background: #1a1a1a;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 1.5rem;
@@ -199,7 +199,7 @@
   }
 
   .dashboard-preview {
-    background: rgba(25, 25, 25, 0.8);
+    background: #1a1a1a;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 2rem;

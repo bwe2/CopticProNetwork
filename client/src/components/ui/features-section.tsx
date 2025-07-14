@@ -66,7 +66,7 @@ export function FeaturesSection() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className="glass-card">
+            <Card key={index} className="glass-card bg-[#1a1a1a]">
               <CardContent className="p-6 text-center">
                 <div className={`w-12 h-12 ${
                   feature.color === 'orange' ? 'bg-[#F28C13]/20' : 'bg-[#0B67AE]/20'

@@ -68,7 +68,7 @@ export function PricingSection() {
         
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
-            <Card key={index} className={`glass-card relative ${
+            <Card key={index} className={`glass-card bg-[#1a1a1a] relative ${
               plan.popular ? 'ring-2 ring-[#F28C13]' : ''
             }`}>
               {plan.popular && (
