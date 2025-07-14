@@ -12,7 +12,7 @@ export function Footer() {
               <img 
                 src={logoImage} 
                 alt="Coptic Pro Network Logo" 
-                className="w-16 h-16 object-contain"
+                className="w-20 h-20 object-contain"
               />
               <div>
                 <h3 className="text-xl font-bold text-white">Coptic Pro Network</h3>
