@@ -137,6 +137,18 @@ export const notifications = pgTable("notifications", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Pending invites table for secure signup
+export const pendingInvites = pgTable("pending_invites", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  fullName: varchar("full_name").notNull(),
+  email: varchar("email").notNull(),
+  church: varchar("church").notNull(),
+  profession: varchar("profession").notNull(),
+  referral: varchar("referral"),
+  status: varchar("status").default("pending"), // "pending", "approved", "rejected"
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // Type exports
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
@@ -152,6 +164,8 @@ export type Resume = typeof resumes.$inferSelect;
 export type InsertResume = typeof resumes.$inferInsert;
 export type Notification = typeof notifications.$inferSelect;
 export type InsertNotification = typeof notifications.$inferInsert;
+export type PendingInvite = typeof pendingInvites.$inferSelect;
+export type InsertPendingInvite = typeof pendingInvites.$inferInsert;
 
 // Zod schemas
 export const insertUserSchema = createInsertSchema(users);
@@ -162,3 +176,4 @@ export const insertReferralSchema = createInsertSchema(referrals);
 export const insertMessageSchema = createInsertSchema(messages);
 export const insertResumeSchema = createInsertSchema(resumes);
 export const insertNotificationSchema = createInsertSchema(notifications);
+export const insertPendingInviteSchema = createInsertSchema(pendingInvites);

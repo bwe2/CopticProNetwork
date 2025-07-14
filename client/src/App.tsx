@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/useAuth";
 import Landing from "@/pages/landing";
 import Dashboard from "@/pages/dashboard";
+import RequestInvite from "@/pages/request-invite";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -13,6 +14,7 @@ function Router() {
 
   return (
     <Switch>
+      <Route path="/request-invite" component={RequestInvite} />
       {isLoading || !isAuthenticated ? (
         <Route path="/" component={Landing} />
       ) : (

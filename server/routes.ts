@@ -5,7 +5,7 @@ import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
 import { analyzeResume, moderateContent } from "./services/openai";
 import { createCustomer, createSubscription, handleWebhook } from "./services/stripe";
-import { insertJobSchema, insertReferralSchema, insertMessageSchema, insertResumeSchema } from "@shared/schema";
+import { insertJobSchema, insertReferralSchema, insertMessageSchema, insertResumeSchema, insertPendingInviteSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
@@ -203,6 +203,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Webhook error:", error);
       res.status(400).json({ message: "Webhook failed" });
+    }
+  });
+
+  // Pending invites endpoint (public)
+  app.post("/api/pending-invites", async (req, res) => {
+    try {
+      const invite = await storage.createPendingInvite(req.body);
+      res.json(invite);
+    } catch (error) {
+      console.error("Error creating pending invite:", error);
+      res.status(500).json({ message: "Failed to create pending invite" });
+    }
+  });
+
+  // Get pending invites (admin only)
+  app.get("/api/pending-invites", isAuthenticated, async (req, res) => {
+    try {
+      const invites = await storage.getPendingInvites();
+      res.json(invites);
+    } catch (error) {
+      console.error("Error fetching pending invites:", error);
+      res.status(500).json({ message: "Failed to fetch pending invites" });
+    }
+  });
+
+  // Update invite status (admin only)
+  app.patch("/api/pending-invites/:id", isAuthenticated, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+      const invite = await storage.updateInviteStatus(id, status);
+      res.json(invite);
+    } catch (error) {
+      console.error("Error updating invite status:", error);
+      res.status(500).json({ message: "Failed to update invite status" });
     }
   });
 

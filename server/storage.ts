@@ -6,6 +6,7 @@ import {
   messages,
   resumes,
   notifications,
+  pendingInvites,
   type User,
   type UpsertUser,
   type Group,
@@ -20,6 +21,8 @@ import {
   type InsertResume,
   type Notification,
   type InsertNotification,
+  type PendingInvite,
+  type InsertPendingInvite,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, desc, sql } from "drizzle-orm";
@@ -60,6 +63,11 @@ export interface IStorage {
   createNotification(notification: InsertNotification): Promise<Notification>;
   getUserNotifications(userId: string): Promise<Notification[]>;
   markNotificationRead(notificationId: string): Promise<void>;
+  
+  // Pending invite operations
+  createPendingInvite(invite: InsertPendingInvite): Promise<PendingInvite>;
+  getPendingInvites(): Promise<PendingInvite[]>;
+  updateInviteStatus(inviteId: string, status: string): Promise<PendingInvite>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -246,6 +254,24 @@ export class DatabaseStorage implements IStorage {
       .update(notifications)
       .set({ isRead: true })
       .where(eq(notifications.id, notificationId));
+  }
+
+  // Pending invite operations
+  async createPendingInvite(inviteData: InsertPendingInvite): Promise<PendingInvite> {
+    const [invite] = await db.insert(pendingInvites).values(inviteData).returning();
+    return invite;
+  }
+
+  async getPendingInvites(): Promise<PendingInvite[]> {
+    return await db.select().from(pendingInvites).orderBy(desc(pendingInvites.createdAt));
+  }
+
+  async updateInviteStatus(inviteId: string, status: string): Promise<PendingInvite> {
+    const [invite] = await db.update(pendingInvites)
+      .set({ status })
+      .where(eq(pendingInvites.id, inviteId))
+      .returning();
+    return invite;
   }
 }
 

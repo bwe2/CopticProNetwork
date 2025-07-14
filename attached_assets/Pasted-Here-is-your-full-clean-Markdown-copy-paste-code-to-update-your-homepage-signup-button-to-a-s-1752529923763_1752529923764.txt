@@ -1,0 +1,97 @@
+Here is your full, clean **Markdown copy-paste code** to update your homepage signup button to a **single, secure “Request Invitation” button** with proper logic and flow:
+
+````md
+### ✏️ Change Sign Up Buttons to Single Secure “Request Invitation” CTA
+
+#### ✅ Replace Dual Buttons With a Single CTA
+
+**OLD:**
+```html
+<!-- Dual Buttons -->
+<button class="btn-primary">Join Now</button>
+<button class="btn-outline">Join Now</button>
+````
+
+**NEW:**
+
+```html
+<!-- Single Request Invitation Button (Styled Like the Left Button) -->
+<button class="btn-primary" onclick="window.location.href='/request-invite'">
+  Request Invitation
+</button>
+```
+
+---
+
+#### 🛠️ `/request-invite` Page Logic
+
+This form collects key info **without exposing sensitive data publicly**.
+
+**Form Fields:**
+
+* Full Name
+* Email
+* Church or Parish Name
+* Profession or Industry
+* Referral (Optional: dropdown or text input)
+* \[Submit] button
+
+On Submit:
+
+1. **Store the data securely in Supabase** in a `pending_invites` table.
+2. **Trigger a private admin notification** (email or dashboard).
+3. **Do NOT show who is already on the platform.**
+4. **Hash all internal links/usernames if any lookup is needed.**
+
+---
+
+#### 🔒 Supabase Table: `pending_invites`
+
+```sql
+CREATE TABLE pending_invites (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  full_name TEXT,
+  email TEXT,
+  church TEXT,
+  profession TEXT,
+  referral TEXT,
+  status TEXT DEFAULT 'pending', -- ['pending', 'approved', 'rejected']
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+---
+
+#### 🔐 Security Best Practices
+
+* Do **not** allow open signup from Supabase Auth.
+* When users try to sign up without an invite:
+
+  * Show error: `This platform is invite-only. Please request an invitation.`
+* Hide all active user profiles from public discovery.
+* Admin dashboard should only be accessible via role-based auth (`role = admin`).
+* Invite links should expire after use (optional `invites` table with `expires_at` column).
+
+---
+
+#### 🧠 Optional Enhancement (Referrer Code Check)
+
+If the user selects someone who referred them:
+
+* Add that user's `referrer_code` to the submission
+* Cross-check with the `users` table (hashed IDs only)
+* No public exposure of who referred whom
+
+---
+
+#### ✅ Summary
+
+* One clean button: **“Request Invitation”**
+* Secure form handling (no leaks)
+* Admin-reviewed approvals
+* Future-proofed for role-based invites and scalable moderation
+
+```
+
+Let me know if you'd like me to generate the actual Replit agent code to automate this flow via Supabase + webhook.
+```
