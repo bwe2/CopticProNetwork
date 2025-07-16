@@ -7,6 +7,55 @@ import { analyzeResume, moderateContent } from "./services/openai";
 import { createCustomer, createSubscription, handleWebhook } from "./services/stripe";
 import { insertJobSchema, insertReferralSchema, insertMessageSchema, insertResumeSchema, insertPendingInviteSchema } from "@shared/schema";
 
+// In-memory user storage for development
+const developmentUsers = new Map([
+  ['admin', { 
+    id: 'admin', 
+    email: 'admin@test.com', 
+    firstName: 'Admin', 
+    lastName: 'User', 
+    tier: 'business', 
+    createdAt: new Date(), 
+    updatedAt: new Date() 
+  }],
+  ['free_test', { 
+    id: 'free_test', 
+    email: 'free_test@test.com', 
+    firstName: 'Free', 
+    lastName: 'Test', 
+    tier: 'free', 
+    createdAt: new Date(), 
+    updatedAt: new Date() 
+  }],
+  ['pro_test', { 
+    id: 'pro_test', 
+    email: 'pro_test@test.com', 
+    firstName: 'Pro', 
+    lastName: 'Test', 
+    tier: 'pro', 
+    createdAt: new Date(), 
+    updatedAt: new Date() 
+  }],
+  ['biz_test', { 
+    id: 'biz_test', 
+    email: 'biz_test@test.com', 
+    firstName: 'Business', 
+    lastName: 'Test', 
+    tier: 'business', 
+    createdAt: new Date(), 
+    updatedAt: new Date() 
+  }],
+  ['mentor_test', { 
+    id: 'mentor_test', 
+    email: 'mentor_test@test.com', 
+    firstName: 'Mentor', 
+    lastName: 'Test', 
+    tier: 'pro', 
+    createdAt: new Date(), 
+    updatedAt: new Date() 
+  }]
+]);
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
   await setupAuth(app);
@@ -15,6 +64,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
+      
+      // Try to get user from development storage first
+      const devUser = developmentUsers.get(userId);
+      if (devUser) {
+        return res.json(devUser);
+      }
+      
+      // Fallback to database storage
       const user = await storage.getUser(userId);
       res.json(user);
     } catch (error) {
@@ -42,21 +99,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
 
-      // Create or update test user
-      const user = await storage.upsertUser({
-        id: testUser.id,
-        email: `${username}@test.com`,
-        firstName: username.replace('_', ' ').split(' ').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-        tier: testUser.tier as any,
-      });
+      // Get user from development storage
+      const user = developmentUsers.get(username);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
 
       // Create session data compatible with the auth middleware
       const sessionUser = {
         claims: {
           sub: testUser.id,
-          email: `${username}@test.com`,
-          first_name: username.replace('_', ' ').split(' ').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-          last_name: null,
+          email: user.email,
+          first_name: user.firstName,
+          last_name: user.lastName,
           profile_image_url: null,
           exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60) // 7 days from now
         },
@@ -76,6 +131,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Test login error:", error);
       res.status(500).json({ message: "Login failed" });
+    }
+  });
+
+  // Job routes
+  app.get('/api/jobs', async (req, res) => {
+    try {
+      const jobs = await storage.getJobs();
+      res.json(jobs);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+      res.status(500).json({ message: "Failed to fetch jobs" });
     }
   });
 
