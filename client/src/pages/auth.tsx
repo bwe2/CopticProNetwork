@@ -52,9 +52,17 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 bg-[#0D0D0D]">
+    <div className="min-h-screen flex items-center justify-center px-6 dark" style={{ 
+      background: 'linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 100%)',
+      minHeight: '100vh'
+    }}>
       <div className="w-full max-w-md">
-        <Card className="glass-card border-white/10">
+        <Card className="glass-card border-white/10 shadow-2xl" style={{ 
+          background: '#1a1a1a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '18px',
+          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)'
+        }}>
           <CardHeader className="text-center pb-6">
             <div className="flex justify-center mb-6">
               <img 
@@ -77,6 +85,11 @@ export default function Auth() {
                   id="username"
                   placeholder="Enter your username"
                   className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-[#F28C13]/50 focus:ring-[#F28C13]/20"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    color: 'white'
+                  }}
                   {...form.register("username", { required: true })}
                 />
               </div>
@@ -88,35 +101,50 @@ export default function Auth() {
                   type="password"
                   placeholder="Enter your password"
                   className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-[#F28C13]/50 focus:ring-[#F28C13]/20"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    color: 'white'
+                  }}
                   {...form.register("password", { required: true })}
                 />
               </div>
               
               <Button 
                 type="submit" 
-                className="w-full btn-primary text-white font-semibold py-3 mt-6"
+                className="w-full text-white font-semibold py-3 mt-6"
+                style={{
+                  background: '#F28C13',
+                  color: 'white',
+                  borderRadius: '8px',
+                  padding: '12px 24px',
+                  fontWeight: '600'
+                }}
                 disabled={mutation.isPending}
               >
                 {mutation.isPending ? "Signing In..." : "Sign In"}
               </Button>
             </form>
             
-            <div className="mt-8 p-4 bg-white/5 rounded-lg border border-white/10">
+            <div className="mt-8 p-4 rounded-lg border" style={{ 
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
               <p className="text-xs text-gray-400 mb-3 font-medium">Development Test Accounts:</p>
               <div className="text-xs text-gray-300 space-y-2">
-                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                <div className="flex items-center justify-between p-2 rounded" style={{ background: 'rgba(255, 255, 255, 0.05)' }}>
                   <span><strong className="text-[#F28C13]">admin</strong> / admin</span>
                   <span className="text-purple-400 text-xs">Business</span>
                 </div>
-                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                <div className="flex items-center justify-between p-2 rounded" style={{ background: 'rgba(255, 255, 255, 0.05)' }}>
                   <span><strong className="text-[#F28C13]">free_test</strong> / CopticTest#2025</span>
                   <span className="text-gray-400 text-xs">Free</span>
                 </div>
-                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                <div className="flex items-center justify-between p-2 rounded" style={{ background: 'rgba(255, 255, 255, 0.05)' }}>
                   <span><strong className="text-[#F28C13]">pro_test</strong> / CopticTest#2025</span>
                   <span className="text-blue-400 text-xs">Pro</span>
                 </div>
-                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                <div className="flex items-center justify-between p-2 rounded" style={{ background: 'rgba(255, 255, 255, 0.05)' }}>
                   <span><strong className="text-[#F28C13]">biz_test</strong> / CopticTest#2025</span>
                   <span className="text-purple-400 text-xs">Business</span>
                 </div>
