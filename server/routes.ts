@@ -46,12 +46,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const user = await storage.upsertUser({
         id: testUser.id,
         email: `${username}@test.com`,
-        username,
         firstName: username.replace('_', ' ').split(' ').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
         tier: testUser.tier as any,
       });
 
-      res.json(user);
+      // Create session data compatible with the auth middleware
+      const sessionUser = {
+        claims: {
+          sub: testUser.id,
+          email: `${username}@test.com`,
+          first_name: username.replace('_', ' ').split(' ').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+          last_name: null,
+          profile_image_url: null,
+          exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60) // 7 days from now
+        },
+        access_token: 'test-token',
+        refresh_token: 'test-refresh-token',
+        expires_at: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60)
+      };
+
+      // Set up session
+      req.login(sessionUser, (err) => {
+        if (err) {
+          console.error('Session login error:', err);
+          return res.status(500).json({ message: 'Session creation failed' });
+        }
+        res.json(user);
+      });
     } catch (error) {
       console.error("Test login error:", error);
       res.status(500).json({ message: "Login failed" });

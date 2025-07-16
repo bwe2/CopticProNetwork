@@ -1,115 +1,111 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Cross, Chrome } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import logoImage from "@assets/Neumorphism style (5)_1752532338127.png";
+
+interface LoginForm {
+  username: string;
+  password: string;
+}
 
 export default function Auth() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleTestLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const form = useForm<LoginForm>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-    try {
-      const response = await apiRequest("POST", "/api/auth/test-login", credentials);
-      const user = await response.json();
-      
+  const mutation = useMutation({
+    mutationFn: async (data: LoginForm) => {
+      const response = await apiRequest("POST", "/api/auth/test-login", data);
+      return response.json();
+    },
+    onSuccess: () => {
       toast({
-        title: "Success",
-        description: "Logged in successfully!",
+        title: "Login Successful",
+        description: "Welcome to Coptic Pro Network!",
       });
-      
-      // Redirect to dashboard
-      window.location.href = "/dashboard";
-    } catch (error) {
+      // Redirect to home page
+      window.location.href = "/";
+    },
+    onError: (error) => {
       toast({
-        title: "Error",
-        description: "Invalid credentials",
+        title: "Login Failed",
+        description: "Invalid credentials. Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setIsLoading(false);
-    }
+    },
+  });
+
+  const onSubmit = (data: LoginForm) => {
+    mutation.mutate(data);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6">
+    <div className="min-h-screen flex items-center justify-center px-6 bg-background">
       <Card className="w-full max-w-md glass-card">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-              <Cross className="w-6 h-6 text-white" />
-            </div>
+            <img 
+              src={logoImage} 
+              alt="Coptic Pro Network Logo" 
+              className="w-16 h-16 object-contain"
+            />
           </div>
-          <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
-          <p className="text-gray-400">Sign in to your Coptic Pro Network account</p>
+          <CardTitle className="text-2xl font-bold">Sign In</CardTitle>
+          <p className="text-gray-300 text-sm">
+            Development Login - Use test credentials
+          </p>
         </CardHeader>
         
-        <CardContent className="space-y-6">
-          {/* Google OAuth */}
-          <Button
-            onClick={() => window.location.href = "/api/login"}
-            className="w-full btn-primary"
-            size="lg"
-          >
-            <Chrome className="w-5 h-5 mr-2" />
-            Continue with Google
-          </Button>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-600"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-gray-900 px-2 text-gray-400">Or for testing</span>
-            </div>
-          </div>
-
-          {/* Test Login Form */}
-          <form onSubmit={handleTestLogin} className="space-y-4">
-            <div>
+        <CardContent className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-2">
               <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
-                type="text"
-                value={credentials.username}
-                onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                placeholder="admin, free_test, pro_test, biz_test, mentor_test"
-                required
+                placeholder="Enter username"
+                {...form.register("username", { required: true })}
               />
             </div>
             
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
-                value={credentials.password}
-                onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                 placeholder="Enter password"
-                required
+                {...form.register("password", { required: true })}
               />
             </div>
             
-            <Button
-              type="submit"
-              className="w-full btn-ghost"
-              disabled={isLoading}
+            <Button 
+              type="submit" 
+              className="w-full btn-primary"
+              disabled={mutation.isPending}
             >
-              {isLoading ? "Signing in..." : "Sign in (Test)"}
+              {mutation.isPending ? "Signing In..." : "Sign In"}
             </Button>
           </form>
-
-          <div className="text-xs text-gray-500 text-center">
-            <p>Test credentials:</p>
-            <p>admin/admin • free_test/CopticTest#2025</p>
-            <p>pro_test/CopticTest#2025 • biz_test/CopticTest#2025</p>
+          
+          <div className="mt-6 p-4 bg-gray-800/50 rounded-lg">
+            <p className="text-xs text-gray-400 mb-2">Test Credentials:</p>
+            <div className="text-xs text-gray-300 space-y-1">
+              <div><strong>admin</strong> / admin (Business)</div>
+              <div><strong>free_test</strong> / CopticTest#2025 (Free)</div>
+              <div><strong>pro_test</strong> / CopticTest#2025 (Pro)</div>
+              <div><strong>biz_test</strong> / CopticTest#2025 (Business)</div>
+            </div>
           </div>
         </CardContent>
       </Card>

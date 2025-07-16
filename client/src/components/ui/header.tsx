@@ -54,7 +54,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => window.location.href = "/api/login"}
+              onClick={() => window.location.href = "/auth"}
               className="btn-ghost text-sm"
             >
               Sign In
@@ -95,7 +95,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => window.location.href = "/api/login"}
+                onClick={() => window.location.href = "/auth"}
                 className="btn-ghost text-sm justify-start"
               >
                 Sign In
