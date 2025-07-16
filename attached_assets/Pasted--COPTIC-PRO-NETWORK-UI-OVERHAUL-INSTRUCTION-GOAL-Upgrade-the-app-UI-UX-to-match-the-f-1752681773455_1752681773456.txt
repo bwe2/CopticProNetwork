@@ -1,0 +1,64 @@
+// 🧠 COPTIC PRO NETWORK — UI OVERHAUL INSTRUCTION
+
+// 🎯 GOAL: Upgrade the app UI/UX to match the full blueprint for Free, Pro, Business, and Admin tiers.
+// This should *wow* users while making navigation intuitive, efficient, and feature-rich, especially for Pro and Business subscribers.
+
+// 📌 CONTEXT:
+// - Users are Coptic Orthodox professionals, mentors, and business leaders.
+// - We promise a useful, secure, and premium-feeling experience that justifies the price (Pro: $5/mo, Business: $25/mo).
+// - The current UI is clean but lacks tier-differentiated visibility, engagement flow, and “premium-feel” elements.
+
+//////////////////////////
+// 🔁 UNIVERSAL UPGRADES //
+//////////////////////////
+
+// ✅ Apply the dark neumorphic style consistently across ALL PAGES (not just login)
+// ✅ Ensure page transitions are smooth with light animations (e.g., fade-in on tabs, buttons hover pop, etc.)
+// ✅ Inject a dynamic welcome message per user tier at the top of dashboard (e.g., “Welcome back, Pro member!”)
+// ✅ Make all cards and sections touch-responsive with floating hover effects and smooth scroll
+
+/////////////////////////////
+// 🧑‍💼 TIER-SPECIFIC UPGRADES //
+/////////////////////////////
+
+// --- FREE USER ---
+// - Show a locked overlay on Pro/Business-only features with a “Upgrade to Unlock” button
+// - Display their tier as a badge: [FREE] (gray muted badge on top right corner)
+// - Include a feature progress bar at top: “You’ve unlocked 3 of 10 features”
+// - Button: “Unlock More” → Opens Upgrade page
+
+// --- PRO USER ---
+// - Show [PRO] badge in electric green or #00FF47 with glow
+// - Display premium unlocks: AI resume optimizer, referral hub, unlimited group access
+// - Include motivational blurb: “You’re leading in the Coptic network — time to connect more.”
+– Make referral feature card stand out (add animation/pulse if referrals are pending)
+
+// --- BUSINESS USER ---
+// - Badge: [BUSINESS] in electric purple or #6C5CE7
+// - Highlight hiring panel, job posting dashboard, and collaboration tools
+// - Add mini-dashboard for their project postings: “You have 2 live projects, 5 applicants.”
+– Include company/team avatar display on sidebar if available
+
+// --- ADMIN ---
+// - [ADMIN] badge in gold, floating top-right
+// - Sidebar: Admin controls (manage users, church groups, flags, payment monitoring)
+// - Enable user impersonation button per profile (for support)
+// - Show internal audit alerts in a dedicated section (e.g., “10 resumes uploaded this week”)
+
+// 💬 Messaging & Groups
+// - Add “Message” button hover tips: “Pro/Business users can message anyone”
+// - In chat UI, add visual tags under names like [Free] [Pro] [Mentor] to guide response expectations
+
+// 🎨 Visual
+// - Ensure all section headers include small icon + title (like “🏗️ Projects” or “📁 Resume Tools”)
+// - Add Coptic cross watermark faintly behind profile cards (optional, on-hover only)
+// - Keep brand fonts consistent (Inter, weight 500–700 for titles)
+
+// ✅ Accessibility
+// - Make sure all main buttons use semantic tags and `aria-label`s
+// - Support keyboard navigation between groups, tabs, and forms
+
+// 📣 Final CTA
+// Ensure all users—especially Free—are nudged with real value: “Upgrade now to unlock full access to the Coptic network, unlimited referrals, and more.”
+
+// This instruction is based on full platform blueprint (tier matrix, uploaded HTMLs, style standards). Continue upgrading incrementally from this foundation to create a high-trust, elite experience.

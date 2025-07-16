@@ -56,10 +56,11 @@ export default function Dashboard() {
 
   const getTierColor = (tier: string) => {
     switch(tier) {
-      case 'free': return 'bg-gray-500';
-      case 'pro': return 'bg-blue-500';
-      case 'business': return 'bg-purple-500';
-      default: return 'bg-gray-500';
+      case 'free': return 'bg-gray-500/80';
+      case 'pro': return 'tier-badge-pro';
+      case 'business': return 'tier-badge-business';
+      case 'admin': return 'tier-badge-admin';
+      default: return 'bg-gray-500/80';
     }
   };
 
@@ -68,7 +69,29 @@ export default function Dashboard() {
       case 'free': return <Star className="w-3 h-3" />;
       case 'pro': return <Crown className="w-3 h-3" />;
       case 'business': return <Building className="w-3 h-3" />;
+      case 'admin': return <Shield className="w-3 h-3" />;
       default: return <Star className="w-3 h-3" />;
+    }
+  };
+
+  const getTierWelcomeMessage = (tier: string, firstName: string) => {
+    const name = firstName || 'there';
+    switch(tier) {
+      case 'free': return `Welcome back, ${name}! You're part of the Coptic network.`;
+      case 'pro': return `Welcome back, Pro member ${name}! You're leading in the Coptic network.`;
+      case 'business': return `Welcome back, Business leader ${name}! Time to expand your network.`;
+      case 'admin': return `Welcome back, Admin ${name}! Your network management dashboard awaits.`;
+      default: return `Welcome back, ${name}!`;
+    }
+  };
+
+  const getFeatureProgress = (tier: string) => {
+    switch(tier) {
+      case 'free': return { unlocked: 3, total: 10, percentage: 30 };
+      case 'pro': return { unlocked: 7, total: 10, percentage: 70 };
+      case 'business': return { unlocked: 10, total: 10, percentage: 100 };
+      case 'admin': return { unlocked: 10, total: 10, percentage: 100 };
+      default: return { unlocked: 1, total: 10, percentage: 10 };
     }
   };
 
@@ -79,7 +102,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[#0D0D0D] p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
+        {/* Header with Tier Badge */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <img 
@@ -89,20 +112,20 @@ export default function Dashboard() {
             />
             <div>
               <h1 className="text-3xl font-bold text-white">
-                Welcome back, {user?.firstName || "Professional"}!
+                {getTierWelcomeMessage(user?.tier || 'free', user?.firstName || '')}
               </h1>
               <div className="flex items-center gap-2 mt-2">
                 <p className="text-gray-300">
                   Your Coptic Pro Network dashboard
                 </p>
-                <Badge className={`${getTierColor(user?.tier || 'free')} text-white text-xs px-2 py-1`}>
-                  {getTierIcon(user?.tier || 'free')}
-                  <span className="ml-1 capitalize">{user?.tier}</span>
-                </Badge>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <Badge className={`${getTierColor(user?.tier || 'free')} text-white text-xs px-3 py-1.5 font-semibold uppercase tracking-wide shadow-lg`}>
+              {getTierIcon(user?.tier || 'free')}
+              <span className="ml-1">{user?.tier || 'free'}</span>
+            </Badge>
             <Button variant="ghost" size="sm" className="relative">
               <Bell className="w-4 h-4" />
               <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#F28C13] rounded-full"></span>
@@ -116,25 +139,87 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Tier-based Welcome Message */}
+        {/* Feature Progress Bar for Free Users */}
         {user?.tier === 'free' && (
           <div className="glass-card mb-8 p-6 border border-yellow-500/20">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center">
                 <Zap className="w-6 h-6 text-yellow-500" />
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-white">Unlock Your Full Potential</h3>
                 <p className="text-gray-300 text-sm">
-                  Upgrade to Pro for AI resume tools, unlimited groups, and advanced networking features.
+                  You've unlocked {getFeatureProgress(user?.tier || 'free').unlocked} of {getFeatureProgress(user?.tier || 'free').total} features
                 </p>
               </div>
               <Button className="btn-primary">
-                Upgrade Now
+                Unlock More
+              </Button>
+            </div>
+            <div className="w-full bg-gray-700 rounded-full h-2">
+              <div 
+                className="bg-gradient-to-r from-[#F28C13] to-yellow-500 h-2 rounded-full transition-all duration-500"
+                style={{ width: `${getFeatureProgress(user?.tier || 'free').percentage}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Pro User Motivation */}
+        {user?.tier === 'pro' && (
+          <div className="glass-card mb-8 p-6 border border-green-500/20">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
+                <Crown className="w-6 h-6 text-green-500" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-white">You're Leading in the Coptic Network</h3>
+                <p className="text-gray-300 text-sm">
+                  Time to connect more. Access AI resume optimizer, referral hub, and unlimited groups.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Business User Dashboard */}
+        {user?.tier === 'business' && (
+          <div className="glass-card mb-8 p-6 border border-purple-500/20">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                <Building className="w-6 h-6 text-purple-500" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-white">Business Dashboard</h3>
+                <p className="text-gray-300 text-sm">
+                  You have 2 live projects, 5 applicants. Manage your hiring panel and collaboration tools.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Admin Controls */}
+        {user?.tier === 'admin' && (
+          <div className="glass-card mb-8 p-6 border border-yellow-500/20">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                <Shield className="w-6 h-6 text-yellow-500" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-white">Admin Overview</h3>
+                <p className="text-gray-300 text-sm">
+                  10 resumes uploaded this week. Manage users, church groups, and system monitoring.
+                </p>
+              </div>
+              <Button variant="outline" className="text-yellow-500 border-yellow-500/30 hover:bg-yellow-500/10">
+                Admin Panel
               </Button>
             </div>
           </div>
         )}
+
+
 
         {/* Dashboard Grid - Single Column Layout */}
         <div className="max-w-4xl mx-auto space-y-6">
