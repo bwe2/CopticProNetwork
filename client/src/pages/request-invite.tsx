@@ -86,13 +86,13 @@ export default function RequestInvite() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-6 bg-background">
-        <Card className="w-full max-w-md glass-card text-center">
+      <div className="min-h-screen flex items-center justify-center px-6 bg-[#0D0D0D]">
+        <Card className="w-full max-w-md glass-card text-center border-white/10">
           <CardContent className="p-8">
-            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 text-green-500" />
+            <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Check className="w-10 h-10 text-green-500" />
             </div>
-            <h2 className="text-2xl font-bold mb-4">Request Submitted!</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white">Request Submitted!</h2>
             <p className="text-gray-300 mb-6">
               Thank you for your interest in joining Coptic Pro Network. We'll review your request and send you an invitation if approved.
             </p>
@@ -106,18 +106,18 @@ export default function RequestInvite() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 bg-background">
-      <Card className="w-full max-w-2xl glass-card">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-4">
+    <div className="min-h-screen flex items-center justify-center px-6 bg-[#0D0D0D]">
+      <Card className="w-full max-w-2xl glass-card border-white/10">
+        <CardHeader className="text-center pb-6">
+          <div className="flex justify-center mb-6">
             <img 
               src={logoImage} 
               alt="Coptic Pro Network Logo" 
-              className="w-16 h-16 object-contain"
+              className="w-20 h-20 object-contain"
             />
           </div>
-          <CardTitle className="text-3xl font-bold">Request Invitation</CardTitle>
-          <p className="text-gray-300">
+          <CardTitle className="text-3xl font-bold text-white mb-3">Request Invitation</CardTitle>
+          <p className="text-gray-300 text-sm">
             Coptic Pro Network is an exclusive, invite-only platform for Coptic Orthodox professionals.
           </p>
         </CardHeader>
@@ -126,10 +126,11 @@ export default function RequestInvite() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name *</Label>
+                <Label htmlFor="fullName" className="text-white text-sm font-medium">Full Name *</Label>
                 <Input
                   id="fullName"
                   placeholder="Enter your full name"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-[#F28C13]/50 focus:ring-[#F28C13]/20"
                   {...form.register("fullName")}
                 />
                 {form.formState.errors.fullName && (
@@ -138,11 +139,12 @@ export default function RequestInvite() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address *</Label>
+                <Label htmlFor="email" className="text-white text-sm font-medium">Email Address *</Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="Enter your email"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-[#F28C13]/50 focus:ring-[#F28C13]/20"
                   {...form.register("email")}
                 />
                 {form.formState.errors.email && (
@@ -152,14 +154,14 @@ export default function RequestInvite() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="church">Church or Parish *</Label>
+              <Label htmlFor="church" className="text-white text-sm font-medium">Church or Parish *</Label>
               <Select onValueChange={(value) => form.setValue("church", value)}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white/5 border-white/10 text-white">
                   <SelectValue placeholder="Select your church" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
                   {churches.map((church) => (
-                    <SelectItem key={church} value={church}>
+                    <SelectItem key={church} value={church} className="hover:bg-white/10 focus:bg-white/10">
                       {church}
                     </SelectItem>
                   ))}
@@ -171,14 +173,14 @@ export default function RequestInvite() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="profession">Profession or Industry *</Label>
+              <Label htmlFor="profession" className="text-white text-sm font-medium">Profession or Industry *</Label>
               <Select onValueChange={(value) => form.setValue("profession", value)}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white/5 border-white/10 text-white">
                   <SelectValue placeholder="Select your profession" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
                   {professions.map((profession) => (
-                    <SelectItem key={profession} value={profession}>
+                    <SelectItem key={profession} value={profession} className="hover:bg-white/10 focus:bg-white/10">
                       {profession}
                     </SelectItem>
                   ))}
@@ -190,17 +192,18 @@ export default function RequestInvite() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="referral">How did you hear about us? (Optional)</Label>
+              <Label htmlFor="referral" className="text-white text-sm font-medium">How did you hear about us? (Optional)</Label>
               <Textarea
                 id="referral"
                 placeholder="Tell us who referred you or how you found out about Coptic Pro Network"
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-[#F28C13]/50 focus:ring-[#F28C13]/20"
                 {...form.register("referral")}
               />
             </div>
 
-            <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
-              <h4 className="font-semibold text-blue-300 mb-2">What happens next?</h4>
-              <ul className="text-sm text-blue-200 space-y-1">
+            <div className="bg-[#0B67AE]/20 border border-[#0B67AE]/30 rounded-lg p-4">
+              <h4 className="font-semibold text-[#0B67AE] mb-2">What happens next?</h4>
+              <ul className="text-sm text-gray-300 space-y-1">
                 <li>• Your request will be reviewed by our team</li>
                 <li>• We'll verify your church and professional background</li>
                 <li>• You'll receive an invitation email within 2-3 business days</li>
@@ -210,7 +213,7 @@ export default function RequestInvite() {
 
             <Button
               type="submit"
-              className="w-full btn-primary"
+              className="w-full btn-primary text-white font-semibold py-3"
               size="lg"
               disabled={mutation.isPending}
             >

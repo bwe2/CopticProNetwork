@@ -136,50 +136,119 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Dashboard Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {/* Profile Overview */}
-          <Card className="glass-card col-span-1">
-            <CardHeader className="pb-3">
+        {/* Dashboard Grid - Single Column Layout */}
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* Profile Overview - Full Width */}
+          <Card className="glass-card">
+            <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-white">
                 <UserCheck className="w-5 h-5 text-[#F28C13]" />
                 Profile Overview
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#F28C13] to-[#0B67AE] rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-white text-xl font-bold">
-                    {user?.firstName?.charAt(0) || 'U'}
-                  </span>
+            <CardContent>
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-shrink-0 text-center md:text-left">
+                  <div className="w-20 h-20 bg-gradient-to-br from-[#F28C13] to-[#0B67AE] rounded-full flex items-center justify-center mx-auto md:mx-0 mb-3">
+                    <span className="text-white text-2xl font-bold">
+                      {user?.firstName?.charAt(0) || 'U'}
+                    </span>
+                  </div>
+                  <h3 className="font-semibold text-white text-lg">{user?.firstName} {user?.lastName}</h3>
+                  <p className="text-gray-400 text-sm">{user?.email}</p>
+                  <Badge className={`${getTierColor(user?.tier || 'free')} text-white text-xs px-2 py-1 mt-2`}>
+                    {getTierIcon(user?.tier || 'free')}
+                    <span className="ml-1 capitalize">{user?.tier}</span>
+                  </Badge>
                 </div>
-                <h3 className="font-semibold text-white">{user?.firstName} {user?.lastName}</h3>
-                <p className="text-gray-400 text-sm">{user?.email}</p>
+                <div className="flex-1">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                    <div className="text-center p-3 bg-white/5 rounded-lg">
+                      <div className="text-2xl font-bold text-white">127</div>
+                      <div className="text-xs text-gray-400">Profile Views</div>
+                    </div>
+                    <div className="text-center p-3 bg-white/5 rounded-lg">
+                      <div className="text-2xl font-bold text-white">43</div>
+                      <div className="text-xs text-gray-400">Network Size</div>
+                    </div>
+                    <div className="text-center p-3 bg-white/5 rounded-lg">
+                      <div className="text-2xl font-bold text-white">12</div>
+                      <div className="text-xs text-gray-400">Referrals Sent</div>
+                    </div>
+                    <div className="text-center p-3 bg-white/5 rounded-lg">
+                      <div className="text-2xl font-bold text-white">8</div>
+                      <div className="text-xs text-gray-400">Jobs Applied</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="ghost" size="sm" className="flex-1">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Edit Profile
+                    </Button>
+                    <Button variant="ghost" size="sm" className="flex-1">
+                      <Award className="w-4 h-4 mr-2" />
+                      View Public Profile
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Profile Views</span>
-                  <span className="text-white font-medium">127</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Network Size</span>
-                  <span className="text-white font-medium">43</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Referrals Sent</span>
-                  <span className="text-white font-medium">12</span>
-                </div>
-              </div>
-              <Button variant="ghost" size="sm" className="w-full">
-                <Settings className="w-4 h-4 mr-2" />
-                Edit Profile
-              </Button>
             </CardContent>
           </Card>
 
-          {/* Active Groups */}
+          {/* Priority Notifications */}
           <Card className="glass-card">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Bell className="w-5 h-5 text-[#F28C13]" />
+                Important Notifications
+                <Badge className="bg-red-500 text-white text-xs px-2 py-1 ml-auto">
+                  3 New
+                </Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-[#F28C13]">
+                  <div className="w-8 h-8 bg-[#F28C13]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="w-4 h-4 text-[#F28C13]" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium text-white">New referral opportunity</div>
+                    <div className="text-xs text-gray-400">Senior Software Engineer at Meta - 2 mutual connections</div>
+                    <div className="text-xs text-gray-500 mt-1">2 hours ago</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-[#0B67AE]">
+                  <div className="w-8 h-8 bg-[#0B67AE]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Users className="w-4 h-4 text-[#0B67AE]" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium text-white">St. Mark NYC group activity</div>
+                    <div className="text-xs text-gray-400">5 new posts in networking discussion</div>
+                    <div className="text-xs text-gray-500 mt-1">4 hours ago</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-green-500">
+                  <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-4 h-4 text-green-500" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium text-white">Profile view spike</div>
+                    <div className="text-xs text-gray-400">Your profile was viewed 23 times today</div>
+                    <div className="text-xs text-gray-500 mt-1">6 hours ago</div>
+                  </div>
+                </div>
+                <Button variant="ghost" size="sm" className="w-full">
+                  <Bell className="w-4 h-4 mr-2" />
+                  View All Notifications
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Groups & Communities */}
+          <Card className="glass-card">
+            <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-white">
                 <Users className="w-5 h-5 text-[#0B67AE]" />
                 Active Groups
@@ -187,87 +256,60 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-                  <div className="w-8 h-8 bg-[#F28C13] rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">SM</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-white">St. Mark NYC</div>
-                    <div className="text-xs text-gray-400">24 members • 5 new posts</div>
-                  </div>
-                </div>
-                {user?.tier !== 'free' && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-                    <div className="w-8 h-8 bg-[#0B67AE] rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">IT</span>
+                    <div className="w-10 h-10 bg-[#F28C13] rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">SM</span>
                     </div>
                     <div className="flex-1">
-                      <div className="text-sm font-medium text-white">IT Professionals</div>
-                      <div className="text-xs text-gray-400">156 members • Active</div>
+                      <div className="text-sm font-medium text-white">St. Mark NYC</div>
+                      <div className="text-xs text-gray-400">24 members • 5 new posts</div>
+                      <div className="text-xs text-[#F28C13] mt-1">Church Group</div>
                     </div>
                   </div>
-                )}
-                {user?.tier === 'free' && (
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 opacity-50">
-                    <Lock className="w-4 h-4 text-gray-400" />
-                    <div className="text-sm text-gray-400">
-                      Upgrade to join more groups
+                  {user?.tier !== 'free' && (
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+                      <div className="w-10 h-10 bg-[#0B67AE] rounded-full flex items-center justify-center">
+                        <span className="text-white text-sm font-bold">IT</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-medium text-white">IT Professionals</div>
+                        <div className="text-xs text-gray-400">156 members • Active</div>
+                        <div className="text-xs text-[#0B67AE] mt-1">Professional Group</div>
+                      </div>
+                    </div>
+                  )}
+                  {user?.tier === 'free' && (
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 opacity-50">
+                      <Lock className="w-4 h-4 text-gray-400" />
+                      <div className="text-sm text-gray-400">
+                        Upgrade to join more groups
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="space-y-3">
+                  <div className="p-3 bg-white/5 rounded-lg">
+                    <div className="text-sm font-medium text-white mb-2">Group Activity</div>
+                    <div className="space-y-2">
+                      <div className="text-xs text-gray-400">• New job posting in IT Professionals</div>
+                      <div className="text-xs text-gray-400">• 3 new members joined St. Mark NYC</div>
+                      <div className="text-xs text-gray-400">• Networking event scheduled</div>
                     </div>
                   </div>
-                )}
-                <Button variant="ghost" size="sm" className="w-full">
-                  <Users className="w-4 h-4 mr-2" />
-                  {user?.tier === 'free' ? 'Upgrade for More' : 'Browse Groups'}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Recent Activity */}
-          <Card className="glass-card">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-white">
-                <TrendingUp className="w-5 h-5 text-green-500" />
-                Recent Activity
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#F28C13] rounded-full mt-2"></div>
-                  <div className="flex-1">
-                    <div className="text-sm text-white">New referral request</div>
-                    <div className="text-xs text-gray-400">Software Engineer at Meta</div>
-                    <div className="text-xs text-gray-500">2 hours ago</div>
-                  </div>
+                  <Button variant="ghost" size="sm" className="w-full">
+                    <Users className="w-4 h-4 mr-2" />
+                    {user?.tier === 'free' ? 'Upgrade for More Groups' : 'Browse All Groups'}
+                  </Button>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#0B67AE] rounded-full mt-2"></div>
-                  <div className="flex-1">
-                    <div className="text-sm text-white">Profile view</div>
-                    <div className="text-xs text-gray-400">Anonymous recruiter</div>
-                    <div className="text-xs text-gray-500">5 hours ago</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                  <div className="flex-1">
-                    <div className="text-sm text-white">Message received</div>
-                    <div className="text-xs text-gray-400">From St. Mark NYC group</div>
-                    <div className="text-xs text-gray-500">1 day ago</div>
-                  </div>
-                </div>
-                <Button variant="ghost" size="sm" className="w-full">
-                  View All Activity
-                </Button>
               </div>
             </CardContent>
           </Card>
 
           {/* Job Opportunities */}
           <Card className="glass-card">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-white">
                 <Briefcase className="w-5 h-5 text-[#F28C13]" />
                 Job Opportunities
@@ -277,33 +319,74 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                <div className="p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-                  <div className="text-sm font-medium text-white">Senior Software Engineer</div>
-                  <div className="text-xs text-gray-400">Meta • Remote • $180k-220k</div>
-                  <div className="text-xs text-[#F28C13] mt-1">2 mutual connections</div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <div className="p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-[#F28C13]">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="text-sm font-medium text-white">Senior Software Engineer</div>
+                      <Badge className="bg-[#F28C13] text-white text-xs px-2 py-1">Hot</Badge>
+                    </div>
+                    <div className="text-xs text-gray-400 mb-2">Meta • Remote • $180k-220k</div>
+                    <div className="text-xs text-[#F28C13]">2 mutual connections</div>
+                    <div className="text-xs text-gray-500 mt-1">Posted 2 hours ago</div>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-[#0B67AE]">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="text-sm font-medium text-white">Product Manager</div>
+                      <Badge className="bg-[#0B67AE] text-white text-xs px-2 py-1">Referral</Badge>
+                    </div>
+                    <div className="text-xs text-gray-400 mb-2">Google • NYC • $160k-200k</div>
+                    <div className="text-xs text-[#0B67AE]">Referral available</div>
+                    <div className="text-xs text-gray-500 mt-1">Posted 1 day ago</div>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-green-500">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="text-sm font-medium text-white">Marketing Director</div>
+                      <Badge className="bg-green-500 text-white text-xs px-2 py-1">Match</Badge>
+                    </div>
+                    <div className="text-xs text-gray-400 mb-2">Apple • Cupertino • $140k-180k</div>
+                    <div className="text-xs text-green-500">Perfect match</div>
+                    <div className="text-xs text-gray-500 mt-1">Posted 3 days ago</div>
+                  </div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-                  <div className="text-sm font-medium text-white">Product Manager</div>
-                  <div className="text-xs text-gray-400">Google • NYC • $160k-200k</div>
-                  <div className="text-xs text-[#0B67AE] mt-1">Referral available</div>
+                <div className="space-y-3">
+                  <div className="p-3 bg-white/5 rounded-lg">
+                    <div className="text-sm font-medium text-white mb-2">Job Stats</div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-xs">
+                        <span className="text-gray-400">Applications Sent</span>
+                        <span className="text-white">12</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span className="text-gray-400">Interviews</span>
+                        <span className="text-white">3</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span className="text-gray-400">Saved Jobs</span>
+                        <span className="text-white">7</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="ghost" size="sm" className="flex-1">
+                      <Target className="w-4 h-4 mr-2" />
+                      Browse All
+                    </Button>
+                    {canPostJobs && (
+                      <Button variant="ghost" size="sm" className="flex-1">
+                        <Briefcase className="w-4 h-4 mr-2" />
+                        Post Job
+                      </Button>
+                    )}
+                  </div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-                  <div className="text-sm font-medium text-white">Marketing Director</div>
-                  <div className="text-xs text-gray-400">Apple • Cupertino • $140k-180k</div>
-                  <div className="text-xs text-green-500 mt-1">Perfect match</div>
-                </div>
-                <Button variant="ghost" size="sm" className="w-full">
-                  <Target className="w-4 h-4 mr-2" />
-                  Browse All Jobs
-                </Button>
               </div>
             </CardContent>
           </Card>
 
           {/* AI Resume Tools */}
           <Card className="glass-card">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-white">
                 <Brain className="w-5 h-5 text-purple-500" />
                 AI Resume Tools
@@ -318,37 +401,65 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               {hasAIFeatures ? (
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
-                    <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center">
-                      <FileText className="w-4 h-4 text-green-500" />
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                      <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center">
+                        <FileText className="w-4 h-4 text-green-500" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-medium text-white">Resume Score</div>
+                        <div className="text-xs text-gray-400">87/100 • Excellent</div>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="text-sm font-medium text-white">Resume Score</div>
-                      <div className="text-xs text-gray-400">87/100 • Excellent</div>
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                      <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
+                        <Target className="w-4 h-4 text-blue-500" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-medium text-white">ATS Optimized</div>
+                        <div className="text-xs text-gray-400">15 keywords added</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                      <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center">
+                        <Brain className="w-4 h-4 text-purple-500" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-medium text-white">AI Analysis</div>
+                        <div className="text-xs text-gray-400">Last updated 2 days ago</div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
-                    <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
-                      <Target className="w-4 h-4 text-blue-500" />
+                  <div className="space-y-3">
+                    <div className="p-3 bg-white/5 rounded-lg">
+                      <div className="text-sm font-medium text-white mb-2">AI Insights</div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-gray-400">• Strong technical skills section</div>
+                        <div className="text-xs text-gray-400">• Missing leadership keywords</div>
+                        <div className="text-xs text-gray-400">• Great project descriptions</div>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="text-sm font-medium text-white">ATS Optimized</div>
-                      <div className="text-xs text-gray-400">15 keywords added</div>
+                    <div className="flex gap-2">
+                      <Button variant="ghost" size="sm" className="flex-1">
+                        <Brain className="w-4 h-4 mr-2" />
+                        Optimize
+                      </Button>
+                      <Button variant="ghost" size="sm" className="flex-1">
+                        <FileText className="w-4 h-4 mr-2" />
+                        View Resume
+                      </Button>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" className="w-full">
-                    <Brain className="w-4 h-4 mr-2" />
-                    Optimize Resume
-                  </Button>
                 </div>
               ) : (
-                <div className="text-center py-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Brain className="w-6 h-6 text-purple-500" />
+                <div className="text-center py-6">
+                  <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Brain className="w-8 h-8 text-purple-500" />
                   </div>
-                  <p className="text-sm text-gray-400 mb-3">
-                    Unlock AI-powered resume optimization and job matching
+                  <h3 className="text-lg font-semibold text-white mb-2">AI Resume Tools</h3>
+                  <p className="text-sm text-gray-400 mb-4">
+                    Unlock AI-powered resume optimization, job matching, and career insights
                   </p>
                   <Button size="sm" className="btn-primary">
                     Upgrade to Pro
@@ -358,71 +469,65 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Referral Network */}
+          {/* Referral Network & Events */}
           <Card className="glass-card">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-white">
                 <MessageSquare className="w-5 h-5 text-green-500" />
-                Referral Network
+                Referrals & Events
                 <Badge className="bg-green-500 text-white text-xs px-2 py-1 ml-auto">
                   5 Pending
                 </Badge>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="text-center p-3 rounded-lg bg-white/5">
-                    <div className="text-lg font-bold text-white">12</div>
-                    <div className="text-xs text-gray-400">Sent</div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <div className="text-sm font-medium text-white mb-2">Referral Network</div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="text-center p-3 rounded-lg bg-white/5">
+                      <div className="text-lg font-bold text-white">12</div>
+                      <div className="text-xs text-gray-400">Sent</div>
+                    </div>
+                    <div className="text-center p-3 rounded-lg bg-white/5">
+                      <div className="text-lg font-bold text-white">8</div>
+                      <div className="text-xs text-gray-400">Received</div>
+                    </div>
                   </div>
-                  <div className="text-center p-3 rounded-lg bg-white/5">
-                    <div className="text-lg font-bold text-white">8</div>
-                    <div className="text-xs text-gray-400">Received</div>
+                  <div className="p-3 rounded-lg bg-white/5">
+                    <div className="text-sm font-medium text-white">Latest Request</div>
+                    <div className="text-xs text-gray-400">Data Scientist at Netflix</div>
+                    <div className="text-xs text-[#F28C13] mt-1">Awaiting response</div>
                   </div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/5">
-                  <div className="text-sm font-medium text-white">Latest Request</div>
-                  <div className="text-xs text-gray-400">Data Scientist at Netflix</div>
-                  <div className="text-xs text-[#F28C13] mt-1">Awaiting response</div>
+                <div className="space-y-3">
+                  <div className="text-sm font-medium text-white mb-2">Upcoming Events</div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                    <div className="w-8 h-8 bg-[#F28C13]/20 rounded-full flex items-center justify-center">
+                      <Calendar className="w-4 h-4 text-[#F28C13]" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium text-white">Networking Mixer</div>
+                      <div className="text-xs text-gray-400">St. Mark Church • Tomorrow 7PM</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                    <div className="w-8 h-8 bg-[#0B67AE]/20 rounded-full flex items-center justify-center">
+                      <Users className="w-4 h-4 text-[#0B67AE]" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium text-white">Tech Talk</div>
+                      <div className="text-xs text-gray-400">Virtual • Friday 6PM</div>
+                    </div>
+                  </div>
                 </div>
-                <Button variant="ghost" size="sm" className="w-full">
+              </div>
+              <div className="flex gap-2 mt-4">
+                <Button variant="ghost" size="sm" className="flex-1">
                   <MessageSquare className="w-4 h-4 mr-2" />
                   Manage Referrals
                 </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Calendar & Events */}
-          <Card className="glass-card">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-white">
-                <Calendar className="w-5 h-5 text-[#0B67AE]" />
-                Upcoming Events
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
-                  <div className="w-8 h-8 bg-[#F28C13]/20 rounded-full flex items-center justify-center">
-                    <Calendar className="w-4 h-4 text-[#F28C13]" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-white">Networking Mixer</div>
-                    <div className="text-xs text-gray-400">St. Mark Church • Tomorrow 7PM</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
-                  <div className="w-8 h-8 bg-[#0B67AE]/20 rounded-full flex items-center justify-center">
-                    <Users className="w-4 h-4 text-[#0B67AE]" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-white">Tech Talk</div>
-                    <div className="text-xs text-gray-400">Virtual • Friday 6PM</div>
-                  </div>
-                </div>
-                <Button variant="ghost" size="sm" className="w-full">
+                <Button variant="ghost" size="sm" className="flex-1">
                   <Calendar className="w-4 h-4 mr-2" />
                   View Calendar
                 </Button>

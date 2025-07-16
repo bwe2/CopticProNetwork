@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/useAuth";
 import Landing from "@/pages/landing";
 import Dashboard from "@/pages/dashboard";
+import Profile from "@/pages/profile";
 import RequestInvite from "@/pages/request-invite";
 import Auth from "@/pages/auth";
 import NotFound from "@/pages/not-found";
@@ -23,6 +24,7 @@ function Router() {
         <>
           <Route path="/" component={Dashboard} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/profile" component={Profile} />
         </>
       )}
       <Route component={NotFound} />

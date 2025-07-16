@@ -52,63 +52,79 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 bg-background">
-      <Card className="w-full max-w-md glass-card">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-4">
-            <img 
-              src={logoImage} 
-              alt="Coptic Pro Network Logo" 
-              className="w-16 h-16 object-contain"
-            />
-          </div>
-          <CardTitle className="text-2xl font-bold">Sign In</CardTitle>
-          <p className="text-gray-300 text-sm">
-            Development Login - Use test credentials
-          </p>
-        </CardHeader>
-        
-        <CardContent className="space-y-4">
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                placeholder="Enter username"
-                {...form.register("username", { required: true })}
+    <div className="min-h-screen flex items-center justify-center px-6 bg-[#0D0D0D]">
+      <div className="w-full max-w-md">
+        <Card className="glass-card border-white/10">
+          <CardHeader className="text-center pb-6">
+            <div className="flex justify-center mb-6">
+              <img 
+                src={logoImage} 
+                alt="Coptic Pro Network Logo" 
+                className="w-20 h-20 object-contain"
               />
             </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter password"
-                {...form.register("password", { required: true })}
-              />
-            </div>
-            
-            <Button 
-              type="submit" 
-              className="w-full btn-primary"
-              disabled={mutation.isPending}
-            >
-              {mutation.isPending ? "Signing In..." : "Sign In"}
-            </Button>
-          </form>
+            <CardTitle className="text-3xl font-bold text-white mb-2">Welcome Back</CardTitle>
+            <p className="text-gray-300 text-sm">
+              Sign in to your Coptic Pro Network account
+            </p>
+          </CardHeader>
           
-          <div className="mt-6 p-4 bg-gray-800/50 rounded-lg">
-            <p className="text-xs text-gray-400 mb-2">Test Credentials:</p>
-            <div className="text-xs text-gray-300 space-y-1">
-              <div><strong>admin</strong> / admin (Business)</div>
-              <div><strong>free_test</strong> / CopticTest#2025 (Free)</div>
-              <div><strong>pro_test</strong> / CopticTest#2025 (Pro)</div>
-              <div><strong>biz_test</strong> / CopticTest#2025 (Business)</div>
+          <CardContent className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <div className="space-y-2">
+                <Label htmlFor="username" className="text-white text-sm font-medium">Username</Label>
+                <Input
+                  id="username"
+                  placeholder="Enter your username"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-[#F28C13]/50 focus:ring-[#F28C13]/20"
+                  {...form.register("username", { required: true })}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-white text-sm font-medium">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-[#F28C13]/50 focus:ring-[#F28C13]/20"
+                  {...form.register("password", { required: true })}
+                />
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="w-full btn-primary text-white font-semibold py-3 mt-6"
+                disabled={mutation.isPending}
+              >
+                {mutation.isPending ? "Signing In..." : "Sign In"}
+              </Button>
+            </form>
+            
+            <div className="mt-8 p-4 bg-white/5 rounded-lg border border-white/10">
+              <p className="text-xs text-gray-400 mb-3 font-medium">Development Test Accounts:</p>
+              <div className="text-xs text-gray-300 space-y-2">
+                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                  <span><strong className="text-[#F28C13]">admin</strong> / admin</span>
+                  <span className="text-purple-400 text-xs">Business</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                  <span><strong className="text-[#F28C13]">free_test</strong> / CopticTest#2025</span>
+                  <span className="text-gray-400 text-xs">Free</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                  <span><strong className="text-[#F28C13]">pro_test</strong> / CopticTest#2025</span>
+                  <span className="text-blue-400 text-xs">Pro</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-white/5 rounded">
+                  <span><strong className="text-[#F28C13]">biz_test</strong> / CopticTest#2025</span>
+                  <span className="text-purple-400 text-xs">Business</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
